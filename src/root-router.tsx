@@ -1,0 +1,29 @@
+import { Navigate, Route, Routes } from "react-router";
+import SignInPage from "./pages/sign-in-page";
+import SignUpPage from "./pages/sign-up-page";
+import ForgetPasswordPage from "./pages/forget-password-page";
+import IndexPage from "./pages/index-page";
+import PostDetailPage from "./pages/post-detail-page";
+import ProfileDetailPage from "./pages/profile-detail-page";
+import ResetPasswordPage from "./pages/reset-password-page";
+import GlobalLayout from "./components/layout/global-layout";
+
+export default function RootRoute() {
+  return (
+    <Routes>
+      <Route element={<GlobalLayout />}>
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/forget-password" element={<ForgetPasswordPage />} />
+
+        <Route path="/" element={<IndexPage />} />
+        <Route path="/post/:postId" element={<PostDetailPage />} />
+        <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
+
+        {/* 위의 요청이 아닌 다른 경로가 가는 화면 */}
+        <Route path="*" element={<Navigate to={"/"} />} />
+      </Route>
+    </Routes>
+  );
+}
