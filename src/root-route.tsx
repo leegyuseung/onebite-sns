@@ -7,19 +7,24 @@ import PostDetailPage from "./pages/post-detail-page";
 import ProfileDetailPage from "./pages/profile-detail-page";
 import ResetPasswordPage from "./pages/reset-password-page";
 import GlobalLayout from "./components/layout/global-layout";
+import GuestOnlyLayout from "./components/layout/guest-only-layout";
 
 export default function RootRoute() {
   return (
     <Routes>
       <Route element={<GlobalLayout />}>
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        <Route element={<GuestOnlyLayout />}>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/forget-password" element={<ForgetPasswordPage />} />
+        </Route>
 
-        <Route path="/" element={<IndexPage />} />
-        <Route path="/post/:postId" element={<PostDetailPage />} />
-        <Route path="/profile/:userId" element={<ProfileDetailPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route element={<GuestOnlyLayout />}>
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/post/:postId" element={<PostDetailPage />} />
+          <Route path="/profile/:userId" element={<ProfileDetailPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+        </Route>
 
         {/* 위의 요청이 아닌 다른 경로가 가는 화면 */}
         <Route path="*" element={<Navigate to={"/"} />} />
