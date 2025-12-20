@@ -8,6 +8,7 @@ import { useInfinitePostsData } from "@/hooks/queries/use-infinite-posts-data";
 export default function PostFeed() {
   const { data, error, isPending, fetchNextPage, isFetchingNextPage } =
     useInfinitePostsData();
+
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -22,7 +23,7 @@ export default function PostFeed() {
   return (
     <div className="flex flex-col gap-10">
       {data.pages.map((page) =>
-        page.map((post) => <PostItem key={post.id} {...post} />),
+        page.map((postId) => <PostItem key={postId} postId={postId} />),
       )}
       {isFetchingNextPage && <Loader />}
 
