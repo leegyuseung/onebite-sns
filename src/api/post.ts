@@ -25,6 +25,7 @@ export async function fetchPosts({
   const { data, error } = await request;
 
   if (error) throw error;
+
   return data.map((post) => ({
     ...post,
     isLiked: post.myLiked && post.myLiked.length > 0,
